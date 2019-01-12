@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    android:orientation="horizontal"
+    tools:context=".ui.main.MainActivity">
+
+    <RelativeLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_main_nama"
+            android:layout_width="120dp"
+            android:layout_height="49dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="bottom"
+            android:text="Nama"
+            android:textSize="28sp" />
+
+        <TextView
+            android:id="@+id/tv_main_alamat"
+            android:layout_width="120dp"
+            android:layout_height="49dp"
+            android:layout_below="@id/tv_main_nama"
+            android:layout_marginBottom="4dp"
+            android:gravity="bottom"
+            android:text="Alamat"
+            android:textSize="28sp" />
+
+        <TextView
+            android:id="@+id/tv_main_gender"
+            android:layout_width="120dp"
+            android:layout_height="49dp"
+            android:layout_below="@id/tv_main_alamat"
+            android:layout_marginBottom="4dp"
+            android:gravity="bottom"
+            android:text="Gender"
+            android:textSize="28sp" />
+
+        <EditText
+            android:id="@+id/et_nama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_main_nama"
+            android:textSize="21sp" />
+
+        <EditText
+            android:id="@+id/et_alamat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_main_nama"
+            android:layout_toRightOf="@id/tv_main_alamat"
+            android:textSize="21sp" />
+
+        <RadioGroup
+            android:id="@+id/rg_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_main_gender"
+            android:layout_below="@id/tv_main_alamat"
+            android:layout_toRightOf="@id/tv_main_gender"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rb_laki"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Laki - Laki" />
+
+            <RadioButton
+                android:id="@+id/rb_perempuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Perempuan" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="Submit" />
+
+
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:layout_weight="1"
+        android:id="@+id/rc_main"
+        android:layout_margin="4dp"
+        android:background="@android:color/holo_blue_light"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/btn_submit"
+        android:layout_below="@id/tv_main_gender">
+
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

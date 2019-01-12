@@ -6,17 +6,19 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
+import java.util.List;
+
 /**
  * Angarsa Labs...!
  * Created by Angga on 13/08/2018.
  */
 @Dao
-public interface DAO {
+public interface DataDiriDAO {
     @Insert
     Long insertData(DataDiri dataDiri);
 
     @Query("Select * from user_db")
-    DataDiri[] getData();
+    List<DataDiri> getData();
 
     @Update
     int updateData(DataDiri item);

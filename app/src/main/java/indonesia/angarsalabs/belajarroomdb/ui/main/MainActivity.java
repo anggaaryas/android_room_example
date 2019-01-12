@@ -136,11 +136,13 @@ public class MainActivity extends AppCompatActivity implements MainContract.view
             if(tvNama.getText().toString().equals("") || tvAlamat.getText().toString().equals("") || radioGroup.getCheckedRadioButtonId() == -1) {
                 Toast.makeText(this, "Harap isi semua data", Toast.LENGTH_SHORT).show();
             } else {
+
                 if (rbLaki.isChecked()) {
                     gender = 'L';
                 } else if (rbPerempuan.isChecked()) {
                     gender = 'P';
                 }
+
                 if(!edit) presenter.insertData(tvNama.getText().toString(), tvAlamat.getText().toString(), gender, appDatabase);
                 else{
                     presenter.editData(tvNama.getText().toString(), tvAlamat.getText().toString(), gender, id, appDatabase);

@@ -24,6 +24,7 @@
                 android:text="Nama:"
                 android:textStyle="bold"/>
             <TextView
+                android:layout_marginLeft="14dp"
                 android:id="@+id/tv_item_nama"
                 android:layout_marginBottom="4dp"
                 android:layout_width="wrap_content"
@@ -35,6 +36,7 @@
                 android:text="ALamat:"
                 android:textStyle="bold"/>
             <TextView
+                android:layout_marginLeft="14dp"
                 android:id="@+id/tv_item_alamat"
                 android:layout_marginBottom="4dp"
                 android:layout_width="wrap_content"
@@ -46,6 +48,7 @@
                 android:text="Gender:"
                 android:textStyle="bold"/>
             <TextView
+                android:layout_marginLeft="14dp"
                 android:id="@+id/tv_item_gender"
                 android:layout_marginBottom="4dp"
                 android:layout_width="wrap_content"
@@ -57,6 +60,7 @@
                 android:text="ID:"
                 android:textStyle="bold"/>
             <TextView
+                android:layout_marginLeft="14dp"
                 android:id="@+id/tv_item_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

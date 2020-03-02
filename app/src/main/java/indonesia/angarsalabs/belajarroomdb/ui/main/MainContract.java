@@ -14,6 +14,8 @@ import indonesia.angarsalabs.belajarroomdb.entity.DataDiri;
  * Created by Angga on 13/08/2018.
  */
 public interface MainContract {
+
+    // inrterface view digunakan untuk kodingan Activity
     interface view extends View.OnClickListener{
         void successAdd();
         void successDelete();
@@ -22,6 +24,8 @@ public interface MainContract {
         void editData(DataDiri item);
         void deleteData(DataDiri item);
     }
+
+    // interfaace presenter digunakan untuk kodingan database nya
     interface presenter {
         void insertData(String nama, String alamat, char gender, AppDatabase database);
         void readData(AppDatabase database);

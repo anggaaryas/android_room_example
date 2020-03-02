@@ -1,6 +1,5 @@
 package indonesia.angarsalabs.belajarroomdb.ui.main;
 
-import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -14,11 +13,18 @@ import indonesia.angarsalabs.belajarroomdb.entity.DataDiri;
  * Created by Angga on 13/08/2018.
  */
 public class MainPresenter implements MainContract.presenter {
-    private MainContract.view view;
+    private MainContract.view viewContract;
 
-    public MainPresenter(MainContract.view view) {
-        this.view = view;
+    public MainPresenter(MainContract.view viewContract) {
+        this.viewContract = viewContract;
     }
+
+
+    /***
+     * InserData dibutuhkan untuk menambahkan data. Class {@link InsertData}
+     * digunakan untuk proses penambahan data ke daabase menggunakan AsyncTask .
+     * Sementara fungsi insertData digunaakan untuk memanggil class {@link InsertData}
+     */
 
     class InsertData extends AsyncTask<Void, Void, Long>{
         private AppDatabase database;
@@ -37,7 +43,7 @@ public class MainPresenter implements MainContract.presenter {
         @Override
         protected void onPostExecute(Long aLong) {
             super.onPostExecute(aLong);
-            view.successAdd();
+            viewContract.successAdd();
         }
 
     }
@@ -52,12 +58,27 @@ public class MainPresenter implements MainContract.presenter {
         new InsertData(database, dataDiri).execute();
     }
 
+    /////////////////////////////////////////////////////////////////
+
+
+    /***
+     * Pada fungsi readData, kita mencoba untuk membaca isi database tanpa menggunakan
+     * AsyncTask . Yaitu dengan cara langsung memanggil perintah untuk membaca databaae
+     * (database.dao().getData() )
+     *
+     * Sebenernya disarankan untuk menggunakan AsyncTask seperti pada fungsi InsertData
+     */
+
     @Override
     public void readData(AppDatabase database) {
-        List list;
+        List<DataDiri> list;
         list = database.dao().getData();
-        view.getData(list);
+        viewContract.getData(list);
     }
+
+    //////////////////////////////////////////////////////////////////////
+
+
 
     class EditData extends AsyncTask<Void, Void, Integer> {
         private AppDatabase database;
@@ -77,7 +98,7 @@ public class MainPresenter implements MainContract.presenter {
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
             Log.d("integer db", "onPostExecute: " + integer);
-            view.successAdd();
+            viewContract.successAdd();
         }
     }
 
@@ -92,6 +113,10 @@ public class MainPresenter implements MainContract.presenter {
 
         new EditData(database, dataDiri).execute();
     }
+
+    /////////////////////////////////////////////////////////////////////
+
+
 
     class DeleteData extends AsyncTask<Void, Void, Void>{
         private AppDatabase database;
@@ -111,7 +136,7 @@ public class MainPresenter implements MainContract.presenter {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            view.successDelete();
+            viewContract.successDelete();
         }
 
     }
@@ -121,5 +146,7 @@ public class MainPresenter implements MainContract.presenter {
                            final AppDatabase database) {
         new DeleteData(database, dataDiri).execute();
     }
+
+    /////////////////////////////////////////////////////////////////////
 
 }

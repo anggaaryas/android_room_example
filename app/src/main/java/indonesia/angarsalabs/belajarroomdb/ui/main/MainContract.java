@@ -1,7 +1,6 @@
 package indonesia.angarsalabs.belajarroomdb.ui.main;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 import android.view.View;
 
 import java.util.List;

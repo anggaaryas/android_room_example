@@ -2,11 +2,11 @@ package indonesia.angarsalabs.belajarroomdb.ui.main;
 
 import android.content.DialogInterface;
 import android.os.Build;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +18,10 @@ import android.widget.Toast;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;*/
+
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 
 import java.util.List;
 
@@ -57,9 +61,13 @@ public class MainActivity extends AppCompatActivity implements MainContract.view
         recyclerView = findViewById(R.id.rc_main);
         radioGroup = findViewById(R.id.rg_main);
 
-        /*FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(this);
+     /*   FlexboxLayoutManager flexboxLayoutManager = new FlexboxLayoutManager(this);
         flexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
-        flexboxLayoutManager.setJustifyContent(JustifyContent.FLEX_START);*/
+        flexboxLayoutManager.setJustifyContent(JustifyContent.FLEX_START);
+
+        recyclerView.setLayoutManager(flexboxLayoutManager);*/
+
+     // TODO: Bisa pakai flexbox, bisa pakai Linear Layout Manager. Silahkan dicoba coba
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         presenter = new MainPresenter(this);
@@ -89,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.view
 
     @Override
     public void getData(List<DataDiri> list) {
+        // Setelah mendapat data dari Database, tampilkan ulang ke recycle view
         adapter = new MainAdapter(this, list, this);
         recyclerView.setAdapter(adapter);
     }
@@ -98,15 +107,24 @@ public class MainActivity extends AppCompatActivity implements MainContract.view
         tvNama.setText(item.getName());
         tvAlamat.setText(item.getAdress());
         id = item.getId();
+
+        // Jika data sebelumnya Laki-laki, check yg laki laki, kalau tidak, check yang perenpuan
         if(String.valueOf(item.getGender()).equals("L")){
             rbLaki.setChecked(true);
         } else rbPerempuan.setChecked(true);
+
+        // var edit untuk memberi tahu bahwa button nya sedang mode edit
+        // cek penggunaannya dibagian fungsi onClick
         edit = true;
         btnOK.setText("Update");
     }
 
     @Override
     public void deleteData(final DataDiri item) {
+        // Saat RecycleView di pencet lama, akan muncul dialog nontifikasi
+        // apakah ingin dihapus atau tidak
+        // menggunakan Allert dialog
+
         AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
@@ -145,6 +163,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.view
 
                 if(!edit) presenter.insertData(tvNama.getText().toString(), tvAlamat.getText().toString(), gender, appDatabase);
                 else{
+                    // Jika mode edit, panggil fungsi edit DB
                     presenter.editData(tvNama.getText().toString(), tvAlamat.getText().toString(), gender, id, appDatabase);
                     edit = false;
                 }
